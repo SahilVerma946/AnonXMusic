@@ -12,7 +12,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
 from AnonXMusic import app
 from config import OWNER_ID
-from AnonXMusic.misc import SUDOERS 
+
 
 async def aexec(code, client, message):
     exec(
@@ -29,10 +29,16 @@ async def edit_or_reply(msg: Message, **kwargs):
 
 
 @app.on_edited_message(
-    filters.command("eval") & SUDOERS & ~filters.forwarded & ~filters.via_bot
+    filters.command("eval")
+    & filters.user(OWNER_ID)
+    & ~filters.forwarded
+    & ~filters.via_bot
 )
-@app.on_edited_message(
-    filters.command("eval") & SUDOERS & ~filters.forwarded & ~filters.via_bot
+@app.on_message(
+    filters.command("eval")
+    & filters.user(OWNER_ID)
+    & ~filters.forwarded
+    & ~filters.via_bot
 )
 async def executor(client: app, message: Message):
     if len(message.command) < 2:
@@ -133,10 +139,16 @@ async def forceclose_command(_, CallbackQuery):
 
 
 @app.on_edited_message(
-    filters.command("sh") & SUDOERS & ~filters.forwarded & ~filters.via_bot
+    filters.command("sh")
+    & filters.user(OWNER_ID)
+    & ~filters.forwarded
+    & ~filters.via_bot
 )
-@app.on_edited_message(
-    filters.command("sh") & SUDOERS & ~filters.forwarded & ~filters.via_bot
+@app.on_message(
+    filters.command("sh")
+    & filters.user(OWNER_ID)
+    & ~filters.forwarded
+    & ~filters.via_bot
 )
 async def shellrunner(_, message: Message):
     if len(message.command) < 2:
