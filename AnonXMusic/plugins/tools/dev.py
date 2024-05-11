@@ -29,16 +29,10 @@ async def edit_or_reply(msg: Message, **kwargs):
 
 
 @app.on_edited_message(
-    filters.command("eval")
-    & filters.user(SUDOERS)
-    & ~filters.forwarded
-    & ~filters.via_bot
+    filters.command("eval") & SUDOERS & ~filters.forwarded & ~filters.via_bot
 )
-@app.on_message(
-    filters.command("eval")
-    & filters.user(SUDOERS)
-    & ~filters.forwarded
-    & ~filters.via_bot
+@app.on_edited_message(
+    filters.command("eval") & SUDOERS & ~filters.forwarded & ~filters.via_bot
 )
 async def executor(client: app, message: Message):
     if len(message.command) < 2:
@@ -139,16 +133,10 @@ async def forceclose_command(_, CallbackQuery):
 
 
 @app.on_edited_message(
-    filters.command("sh")
-    & filters.user(SUDOERS)
-    & ~filters.forwarded
-    & ~filters.via_bot
+    filters.command("sh") & SUDOERS & ~filters.forwarded & ~filters.via_bot
 )
-@app.on_message(
-    filters.command("sh")
-    & filters.user(SUDOERS)
-    & ~filters.forwarded
-    & ~filters.via_bot
+@app.on_edited_message(
+    filters.command("sh") & SUDOERS & ~filters.forwarded & ~filters.via_bot
 )
 async def shellrunner(_, message: Message):
     if len(message.command) < 2:
